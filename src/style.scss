@@ -4,3 +4,51 @@ body {
   background: darken(white, 10%);
   margin: 50px;
 }
+
+
+
+.NoteBody{
+  display: flex;
+  background: red;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style: none;
+  height: 300px;
+  width: 250px;
+
+}
+
+.NoteTop{
+  background: green;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-between;
+
+}
+
+.NoteBottom{
+  background: orange;
+  list-style: none;
+  justify-content: center;
+  height: 100px;
+  width: 90px;
+
+}
+
+.topBoxLeft{
+  background: blue;
+  list-style: none;
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.topBoxRight{
+  background: black;
+  flex-direction: row;
+  justify-content: flex-end;
+
+}
+
+.NoteMD{}
