@@ -45,7 +45,7 @@ class Note extends Component {
 
   renderTextArea() {
     if (this.state.isEditing) {
-      return <textarea onChange={this.onTextChange} />;
+      return <textarea onChange={this.onTextChange} placeholder={this.props.note.text} />;
     } else {
       return <div className="noteMD" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
     }

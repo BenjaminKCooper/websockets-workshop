@@ -3,6 +3,9 @@ import Immutable from 'immutable';
 import SearchBar from './searchBar';
 import Note from './note';
 
+const uuid = require('uuid'); // I learned how to implement a uuid from : https://www.npmjs.com/package/uuid
+
+
 // example class based component (smart component)
 class App extends Component {
   constructor(props) {
@@ -17,7 +20,7 @@ class App extends Component {
   }
 
   createNode(text) {
-    const id = this.state.notes.size + 1; // '1';
+    const id = uuid.v1();
     const note = {
       title: text,
       text: '',
