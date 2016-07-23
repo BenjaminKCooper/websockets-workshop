@@ -6,16 +6,14 @@ body {
 }
 
 
-
 .NoteBody{
   display: flex;
-  background: red;
+  background: #7C5CA7;
   flex-direction: column;
   justify-content: space-between;
   list-style: none;
   height: 300px;
   width: 250px;
-
 }
 
 .NoteTop{

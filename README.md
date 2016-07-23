@@ -1,1 +1,1 @@
-## js-starter with react
+# Benjamin Cooper - Homework 3

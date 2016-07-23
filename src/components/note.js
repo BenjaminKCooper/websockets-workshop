@@ -39,12 +39,11 @@ class Note extends Component {
 
   renderTextArea() {
     if (this.state.isEditing) {
-      return <Textarea onChange={this.onTextChange} placeholder={this.props.note.text} />;
+      return <Textarea onChange={this.onTextChange} value={this.props.note.text} />;
     } else {
       return <div className="noteMD" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
     }
   }
-
 
   renderEdit() {
     if (this.state.isEditing) {
@@ -61,7 +60,7 @@ class Note extends Component {
     return (
       <Draggable
         handle=".topBoxRight"
-        grid={[25, 25]}
+        grid={[1, 1]}
         defaultPosition={{ x: 11, y: 23 }}
         position={{ x: this.props.note.x, y: this.props.note.y }}
         onStart={this.onStartDrag}
