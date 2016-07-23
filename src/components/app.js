@@ -12,14 +12,15 @@ class App extends Component {
     };
     this.createNode = this.createNode.bind(this);
     this.onDeleteClick = this.onDeleteClick.bind(this);
+    this.editChangeText = this.editChangeText.bind(this);
     // init component state here
   }
 
   createNode(text) {
-    const id = '1';
+    const id = this.state.notes.size + 1; // '1';
     const note = {
       title: text,
-      text: 'IS THIS WORKING?!?!',
+      text: '',
       x: 400,
       y: 12,
       zIndex: 26,
@@ -37,12 +38,19 @@ class App extends Component {
   }
 
 
+  editChangeText(id, newText) {
+    console.log(newText + 1);
+    this.setState({
+      notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, { text: newText }); }),
+    });
+  }
+
   render() {
     return (
       <div>
         <SearchBar onButtonPress={this.createNode} />
         {this.state.notes.entrySeq().map(([id, note]) => {
-          return <Note key={id} id={id} note={note} onDeleteClick={this.onDeleteClick} />;
+          return <Note key={id} id={id} note={note} editChangeText={this.editChangeText} onDeleteClick={this.onDeleteClick} />;
         })}
       </div>
     );
