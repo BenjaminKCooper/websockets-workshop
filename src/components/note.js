@@ -11,6 +11,7 @@ class Note extends Component {
     this.onEditClick = this.onEditClick.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
     this.renderEdit = this.renderEdit.bind(this);
+    this.onDrag = this.onDrag.bind(this);
   }
 
   onEditClick(event) { // CHANGES THIS TO BE PRETTIER!!!! YOU MAKE MAKE IT LIKE ONE LINE
@@ -32,6 +33,19 @@ class Note extends Component {
     this.props.editChangeText(this.props.id, event.target.value);
   }
 
+  onDrag(e, ui) {
+    this.props.updatePostion(this.props.id, ui.x, ui.y);
+  }
+
+  renderTextArea() {
+    if (this.state.isEditing) {
+      return <Textarea onChange={this.onTextChange} placeholder={this.props.note.text} />;
+    } else {
+      return <div className="noteMD" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
+    }
+  }
+
+
   renderEdit() {
     if (this.state.isEditing) {
       // this.setState({ isEditing: true });
@@ -41,20 +55,6 @@ class Note extends Component {
       return <i onClick={this.onEditClick} className="fa fa-pencil-square-o" aria-hidden="true"></i>;
     }
   }
-
-
-  renderTextArea() {
-    if (this.state.isEditing) {
-      return <textarea onChange={this.onTextChange} placeholder={this.props.note.text} />;
-    } else {
-      return <div className="noteMD" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
-    }
-  }
-
-
-/*
-Now, you can do a similar thing to that which you did with the renderEdit and onEditClick methods. This time, you want it to either return that which is currently there, OR an HTML editbox or whatever it is called!
-*/
 
 
   render() {
