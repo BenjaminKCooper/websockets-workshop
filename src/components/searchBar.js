@@ -20,9 +20,9 @@ class SearchBar extends Component {
   }
   render() {
     return (
-      <div>
-        <input onChange={this.onInputChange} value={this.state.searchterm} />
-        <button type="submit" onClick={this.onButtonPress} value={this.state.searchterm} >Create</button>
+      <div className="searchBar">
+        <input className="searchBarInput" onChange={this.onInputChange} value={this.state.searchterm} />
+        <button className="searchBarButton" type="submit" onClick={this.onButtonPress} value={this.state.searchterm} >Create</button>
       </div>
   );
   }

@@ -39,9 +39,9 @@ class Note extends Component {
 
   renderTextArea() {
     if (this.state.isEditing) {
-      return <Textarea onChange={this.onTextChange} value={this.props.note.text} />;
+      return <Textarea id="textareaDiv" className="noteMD" onChange={this.onTextChange} value={this.props.note.text} />;
     } else {
-      return <div className="noteMD" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
+      return <div id="markedDiv" className="noteMD" dangerouslySetInnerHTML={{ __html: marked(this.props.note.text || '') }} />;
     }
   }
 
@@ -67,17 +67,21 @@ class Note extends Component {
         onDrag={this.onDrag}
         onStop={this.onStopDrag}
       >
-        <div className="NoteBody">
+        <div id="note" className="NoteBody">
           <div className="NoteTop">
-            <ul className="topBoxLeft">
-              <li>{this.props.note.title}</li>
+            <div className="topBoxLeft">
+              <h>{this.props.note.title}</h>
               {this.renderEdit()}
-              <li><i onClick={this.onDeleteClick} className="fa fa-trash-o" aria-hidden="true"></i></li>
-            </ul>
+              <h><i onClick={this.onDeleteClick} className="fa fa-trash-o" aria-hidden="true"></i></h>
+            </div>
             <h className="topBoxRight"><i className="fa fa-arrows-alt" aria-hidden="true"></i></h>
           </div>
-          <div className="NoteBottom">
+
+          <div className="NoteCenter">
             {this.renderTextArea()}
+          </div>
+
+          <div className="NoteBottom">
           </div>
         </div>
       </Draggable>
