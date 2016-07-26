@@ -34,6 +34,7 @@ class Note extends Component {
   }
 
   onDrag(e, ui) {
+    console.log(this.props.id);
     this.props.updatePostion(this.props.id, ui.x, ui.y);
   }
 

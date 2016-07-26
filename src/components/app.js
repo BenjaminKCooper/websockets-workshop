@@ -3,6 +3,9 @@ import Immutable from 'immutable';
 import SearchBar from './searchBar';
 import Note from './note';
 
+import * as firebasedb from './firebasedb';
+
+
 const uuid = require('uuid'); // I learned how to implement a uuid from : https://www.npmjs.com/package/uuid
 
 
@@ -17,18 +20,28 @@ class App extends Component {
     this.onDeleteClick = this.onDeleteClick.bind(this);
     this.updatePostion = this.updatePostion.bind(this);
     this.editChangeText = this.editChangeText.bind(this);
+    // this.handleNotes = this.handleNotes.bind(this);
+    this.createNode = this.createNode.bind(this);
+
+    // firebasedb.onNotesChanged(this.handleNotes);
+  }
+
+  componentWillMount() {
+    firebasedb.onNotesChanged(notes => {
+      this.setState({ notes: Immutable.Map(notes) });
+    });
   }
 
 
   onDeleteClick(id) {
+    firebasedb.delNoteFireBase(id);
     this.setState({
       notes: this.state.notes.delete(id),
     });
   }
 
-
   createNode(text) {
-    const id = uuid.v1();
+    // const id = uuid.v1();
     const note = {
       title: text,
       text: '',
@@ -36,25 +49,32 @@ class App extends Component {
       y: 12,
       zIndex: 26,
     };
-
-    this.setState({
-      notes: this.state.notes.set(id, note),
-    });
+    firebasedb.createNoteFireBase(note);
+    // this.setState({
+    //   notes: this.state.notes.set(id, note),
+    // });
   }
 
   editChangeText(id, newText) {
-    console.log(newText + 1);
-    this.setState({
-      notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, { text: newText }); }),
-    });
+    firebasedb.editNoteFireBase(id, newText);
+    // this.setState({
+    //   notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, { text: newText }); }),
+    // });
   }
 
   updatePostion(id, newX, newY) {
-    console.log(newX);
-    this.setState({
-      notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, { x: newX, y: newY }); }),
-    });
+    firebasedb.editNoteFireBaseXY(id, newX, newY);
+
+
+    // this.setState({
+    //   notes: this.state.notes.update(id, (n) => { return Object.assign({}, n, { x: newX, y: newY }); }),
+    // });
   }
+
+  // handleNotes(newNotes) {
+  //   console.log('works');
+  //   this.setState({ notes: newNotes });
+  // }
 
   render() {
     return (
